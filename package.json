@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kazu-S-1110/TypeScript-practice#readme",
   "devDependencies": {
+    "ts-node": "^8.5.4",
     "typescript": "^3.7.5"
   }
 }
