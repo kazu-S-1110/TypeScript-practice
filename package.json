@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kazu-S-1110/TypeScript-practice/issues"
   },
-  "homepage": "https://github.com/kazu-S-1110/TypeScript-practice#readme"
+  "homepage": "https://github.com/kazu-S-1110/TypeScript-practice#readme",
+  "devDependencies": {
+    "typescript": "^3.7.5"
+  }
 }
