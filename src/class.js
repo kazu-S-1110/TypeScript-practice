@@ -27,11 +27,32 @@ hoge.greeting();
 var Teacher = /** @class */ (function (_super) {
     __extends(Teacher, _super);
     // もし初期化時点でプロパティを追加したいなら以下を書く必要がある
-    function Teacher(name, age, subject) {
+    function Teacher(name, age, _subject) {
         var _this = _super.call(this, name, age) || this;
-        _this.subject = subject;
+        _this._subject = _subject;
         return _this;
     }
+    Object.defineProperty(Teacher.prototype, "subject", {
+        // ゲッターはなにかを取得したときに走る関数のこと、セッターはなにかを変更したときに走る関数のこと（ES3では扱えないので注意）
+        //ゲッターは必ず一つ以上の値を返すようにする
+        get: function () {
+            if (!this._subject) {
+                throw new Error('There is no subject');
+            }
+            return this._subject;
+        },
+        //セッターは必ず一つ以上のプロパティを含める、またゲッターと同じ関数名を設定することが可能(ただし、扱う型は同一でなければならない）
+        set: function (value) {
+            if (!value) {
+                throw new Error('There is no subject');
+            }
+            else {
+                this._subject = value;
+            }
+        },
+        enumerable: false,
+        configurable: true
+    });
     // メソッドの上書きがしたい場合は、書くしかない。
     Teacher.prototype.greeting = function () {
         console.log("I'm " + this.name + ",I am " + this.age + " old, I teach " + this.subject + ".");
@@ -39,4 +60,5 @@ var Teacher = /** @class */ (function (_super) {
     return Teacher;
 }(Person));
 var teacher = new Teacher("sensei", 40, "English");
+teacher._subject = "Math";
 teacher.greeting();
