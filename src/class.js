@@ -1,19 +1,13 @@
 "use strict";
 var Person = /** @class */ (function () {
-    function Person(firstname, lastname) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
     }
     Person.prototype.greeting = function () {
-        console.log("I'm " + this.firstname + "," + this.lastname);
+        console.log("I'm " + this.name + ",I am " + this.age + " old");
     };
     return Person;
 }());
-var hogehoge = new Person("hoge", "sage");
-hogehoge.greeting();
-var anotherPerson = {
-    firstname: "fuga",
-    lastname: "hige",
-    anotherGreeting: hogehoge.greeting
-};
-anotherPerson.anotherGreeting();
+var hoge = new Person("hoge", 20);
+hoge.greeting();
