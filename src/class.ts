@@ -12,20 +12,28 @@ abstract class Person {
 
   greeting() {
     console.log(`I'm ${this.name},I am ${this.age} old`)
-    //継承先のメソッドにアクセスしたい場合はabstractを使用すること。使用する場合にはクラスの宣言時にも書くこと
     this.explainJob()
   }
   abstract explainJob(): void 
 }
-//abstractを使用した場合、そのクラスからインスタンスを作成することは不可能。継承前提で書く。
-//失敗例　const hoge = new Person
 
 
 class Teacher extends Person{
-  constructor(name:string,age:number,public _subject:string) {
+  // contstructorにprivateをつけると(newで)インスタンスを作ることができなくなる。（シングルトンパターン)
+  // ->クラスからインスタンスを一つしか作れなくする,作る際はクラスの宣言内で作る。
+  constructor(name: string, age: number, public _subject: string) {
     super(name, age)
     this.greeting()
   }
+  // staticで内部からのみアクセスできるプロパティを定義
+  private static instance:Teacher;
+  // 呼び出しにはstaticを併用してインスタンスを生成する
+  static getInstance() {
+    if (Teacher.instance) return Teacher.instance //この記述で1回だけしかインスタンスを作れないようにする
+    Teacher.instance = new Teacher("sense", 30, "programming")
+    return Teacher.instance
+  }
+  
   explainJob() {
     console.log(`I'm teacher and I teach ${this._subject}`)
   }
@@ -35,3 +43,7 @@ class Teacher extends Person{
 
 }
 const teacher = new Teacher("sensei", 40, "English")
+
+const teacher2 = Teacher.getInstance()
+const teacher3 = Teacher.getInstance()
+console.log({ teacher2, teacher3 })//同じものが入ってる。
