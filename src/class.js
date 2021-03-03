@@ -17,13 +17,25 @@ var Person = /** @class */ (function () {
         this.name = name;
         this.age = age;
     }
+    Person.isAdult = function (age) {
+        if (age > 17)
+            return true;
+        return false;
+    };
+    //もしstaticの値にアクセスする場合はthisを使わずにクラス名を書く
+    Person.prototype.incrementAge = function () {
+        this.age += 1;
+        Person.species = "changed!";
+    };
     Person.prototype.greeting = function () {
         console.log("I'm " + this.name + ",I am " + this.age + " old");
     };
+    //インスタンスを作らずにクラスの値を使う方法（newとか使わない方法）
+    Person.species = "ホモ・サピエンス";
     return Person;
 }());
-var hoge = new Person("hoge", 20);
-hoge.greeting();
+// const hoge = new Person("hoge",20);
+// hoge.greeting()
 var Teacher = /** @class */ (function (_super) {
     __extends(Teacher, _super);
     // もし初期化時点でプロパティを追加したいなら以下を書く必要がある
@@ -60,5 +72,12 @@ var Teacher = /** @class */ (function (_super) {
     return Teacher;
 }(Person));
 var teacher = new Teacher("sensei", 40, "English");
-teacher._subject = "Math";
-teacher.greeting();
+// teacher._subject = "Math"
+// teacher.greeting()
+console.log(Person.species);
+console.log(Person.isAdult(20));
+//継承先でもstaticにしたものは呼び出しが可能
+console.log(Teacher.species);
+console.log(Teacher.isAdult(30));
+teacher.incrementAge();
+console.log(Person.species);

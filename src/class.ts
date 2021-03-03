@@ -1,13 +1,25 @@
 class Person {
+  //インスタンスを作らずにクラスの値を使う方法（newとか使わない方法）
+  static species = "ホモ・サピエンス"
+  static isAdult(age: number) {
+    if (age > 17) return true
+    return false
+  }
   constructor(public name:string,protected age:number) {
   }
+  //もしstaticの値にアクセスする場合はthisを使わずにクラス名を書く
+  incrementAge() {
+    this.age += 1
+    Person.species = "changed!"
+  }
+
   greeting() {
     console.log(`I'm ${this.name},I am ${this.age} old`)
   }
 }
 
-const hoge = new Person("hoge",20);
-hoge.greeting()
+// const hoge = new Person("hoge",20);
+// hoge.greeting()
 
 class Teacher extends Person{
   // ゲッターはなにかを取得したときに走る関数のこと、セッターはなにかを変更したときに走る関数のこと（ES3では扱えないので注意）
@@ -38,6 +50,14 @@ class Teacher extends Person{
 
 }
 const teacher = new Teacher("sensei", 40, "English")
-teacher._subject = "Math"
-teacher.greeting()
+// teacher._subject = "Math"
+// teacher.greeting()
 
+console.log(Person.species)
+console.log(Person.isAdult(20))
+//継承先でもstaticにしたものは呼び出しが可能
+console.log(Teacher.species)
+console.log(Teacher.isAdult(30))
+
+teacher.incrementAge()
+console.log(Person.species)
