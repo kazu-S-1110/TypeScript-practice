@@ -60,4 +60,4 @@ var Teacher = /** @class */ (function (_super) {
 var teacher = new Teacher("sensei", 40, "English");
 var teacher2 = Teacher.getInstance();
 var teacher3 = Teacher.getInstance();
-console.log({ teacher2: teacher2, teacher3: teacher3 });
+console.log({ teacher2: teacher2, teacher3: teacher3 }); //同じものが入ってる。
