@@ -1,9 +1,9 @@
 "use strict";
 var human = {
     name: "peter",
-    age: 20
+    age: 20,
+    greeting: function (message) {
+        console.log(message);
+    }
 };
-var developer = {
-    name: "hoge",
-    age: 10
-};
+human.greeting("hi");
