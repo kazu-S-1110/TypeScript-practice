@@ -1,17 +1,21 @@
-interface Human {
+type Human = {
   name: string,
   age: number,
-  //メソッドの書き方は二つ、下の方が見やすい
-  // greeting:(message:string) => void
   greeting(message:string):void
 }
 
-const human: Human = {
-  name: "peter",
-  age: 20,
-  greeting(message: string) {
+// クラスにインターフェイスを適用させる方法（少なくともインターフェイスの条件を満たすよう定義する）
+// 適用させるインターフェイスは複数指定することが可能,
+// インターフェイスの代わりにタイプエイリアスも指定可能だが、インターフェイスの方がわかりやすい
+class Developer implements Human {
+  constructor(
+    public name: string,
+    public age: number,
+    // プロパティを追加することも可能
+    public experience: number) {
+    }
+  greeting(message:string) {
     console.log(message)
   }
+  
 }
-
-human.greeting("hi")

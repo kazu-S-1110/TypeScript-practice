@@ -1,9 +1,17 @@
 "use strict";
-var human = {
-    name: "peter",
-    age: 20,
-    greeting: function (message) {
-        console.log(message);
+// クラスにインターフェイスを適用させる方法（少なくともインターフェイスの条件を満たすよう定義する）
+// 適用させるインターフェイスは複数指定することが可能,
+// インターフェイスの代わりにタイプエイリアスも指定可能だが、インターフェイスの方がわかりやすい
+var Developer = /** @class */ (function () {
+    function Developer(name, age, 
+    // プロパティを追加することも可能
+    experience) {
+        this.name = name;
+        this.age = age;
+        this.experience = experience;
     }
-};
-human.greeting("hi");
+    Developer.prototype.greeting = function (message) {
+        console.log(message);
+    };
+    return Developer;
+}());
