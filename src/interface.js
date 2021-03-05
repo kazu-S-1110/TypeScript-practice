@@ -1,11 +1,6 @@
 "use strict";
-// クラスにインターフェイスを適用させる方法（少なくともインターフェイスの条件を満たすよう定義する）
-// 適用させるインターフェイスは複数指定することが可能,
-// インターフェイスの代わりにタイプエイリアスも指定可能だが、インターフェイスの方がわかりやすい
 var Developer = /** @class */ (function () {
-    function Developer(name, age, 
-    // プロパティを追加することも可能
-    experience) {
+    function Developer(name, age, experience) {
         this.name = name;
         this.age = age;
         this.experience = experience;
@@ -15,3 +10,7 @@ var Developer = /** @class */ (function () {
     };
     return Developer;
 }());
+// 構造的部分型
+// 型注釈以上の代入をすることは可能、言い換えれば型注釈で宣言されたものは持っている。
+var user = new Developer("Jack", 20, 3);
+// user.experience ⇦エラーを吐く
