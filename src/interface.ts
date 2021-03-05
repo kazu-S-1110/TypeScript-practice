@@ -1,5 +1,6 @@
 interface Human {
-  name: string,
+  // interfaceで定義している型にreadonlyをつけることが可能、直接的な変更を無効にする
+  readonly name: string,
   age: number,
   greeting(message:string):void
 }
@@ -14,7 +15,9 @@ class Developer implements Human {
     console.log(message)
   }  
 }
-// 構造的部分型
-// 型注釈以上の代入をすることは可能、言い換えれば型注釈で宣言されたものは持っている。
 const user: Human = new Developer("Jack", 20, 3)
-// user.experience ⇦エラーを吐く
+// user.name = "Sparrow" readonlyなため無効な記述
+// しかし、implementsで指定したクラス内でpublicにしていた場合は変更が可能（上書きされる）
+const dever = new Developer("hoge", 30, 1)
+dever.name = "fuga" //可能な記述（publicで上書きしているため）
+
