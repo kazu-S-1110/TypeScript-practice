@@ -1,11 +1,14 @@
-interface Human {
-  // interfaceで定義している型にreadonlyをつけることが可能、直接的な変更を無効にする
-  readonly name: string,
+// interfaceの継承（extends）の方法
+interface Namable {
+  name :string
+}
+//extendsで繋げていくだけ、複数指定が可能（クラスは一つだけ）継承元がtypeでも可能　
+interface Human extends Namable {
   age: number,
   greeting(message:string):void
 }
 
-class Developer implements Human {
+class Developer implements Human,Namable {
   constructor(
     public name: string,
     public age: number,
@@ -15,9 +18,5 @@ class Developer implements Human {
     console.log(message)
   }  
 }
-const user: Human = new Developer("Jack", 20, 3)
-// user.name = "Sparrow" readonlyなため無効な記述
-// しかし、implementsで指定したクラス内でpublicにしていた場合は変更が可能（上書きされる）
-const dever = new Developer("hoge", 30, 1)
-dever.name = "fuga" //可能な記述（publicで上書きしているため）
+const user = new Developer("Jack", 20, 3)
 
