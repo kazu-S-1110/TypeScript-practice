@@ -1,4 +1,6 @@
 "use strict";
+var sumFunc;
+sumFunc = function (n1, n2) { return n1 + n2; };
 var Developer = /** @class */ (function () {
     function Developer(name, age, experience) {
         this.name = name;
