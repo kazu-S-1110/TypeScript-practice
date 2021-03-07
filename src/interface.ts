@@ -8,10 +8,10 @@ interface Namable {
   nickname?: string //?をつけるだけ,あってもなくてもいいプロパティ
   sayHello?(message?:string):void //メソッドにも？を記述可能
 }
-
+　
 const namable: Namable  ={
   name:"Jack"
-}
+}　
 
 interface Human extends Namable {
   age: number,
