@@ -1,4 +1,4 @@
-// 型アサーションを使って、手動で型を上書きする方法（2つある）
+// Non-null assertionの使い方
 type Engineer = {
   name: string;
   role: string;
@@ -61,11 +61,6 @@ function havePet(pet: Pet) {
 }
 // havePet(new Bird());
 
-// const input = document.getElementById("input") //これだと型推論が働いてしまい、input.valueにアクセスできない。型注釈してもダメ(TypescriptでHTMLまでは解析できない)。なので型アサーションをして手動で無理矢理型をつける。
-const input = <HTMLInputElement>document.getElementById('input'); //inputであるとアサーションするには＜＞で囲む
-//別解
-// const input = document.getElementById("id") as HTMLInputElement としてもOK
-// もしReact（JSX）で書いてる場合は、タグと混同してしまうのでasで書いた方が無難
-input.value = 'initial input value';
-// 上2行をさらにコンパクトに書くと
-// (document.getElementById("input") as HTMLInputElement).value = "initial input value"
+const input = document.getElementById('input')! //末尾にエクスクラメーションマークを書きNullじゃないことを明示する
+// if文で書くより短くなるが手動で定義することになるので注意が必要
+// input.value = 'initial input value';
