@@ -21,7 +21,7 @@ function describeProfile(nomadworker) {
 }
 var Dog = /** @class */ (function () {
     function Dog() {
-        this.kind = 'dog'; //kindプロパティが判別とかタグとか呼ばれてる
+        this.kind = 'dog';
     }
     Dog.prototype.speak = function () {
         console.log('Bow-wow');
@@ -42,8 +42,7 @@ var Bird = /** @class */ (function () {
 }());
 function havePet(pet) {
     pet.speak(); //speakはどちらにもあるのでアクセスが可能
-    switch (pet.kind //タグでswitch文を書くのに向いている
-    ) {
+    switch (pet.kind) {
         case 'bird':
             pet.fly();
     }
@@ -51,4 +50,12 @@ function havePet(pet) {
     //   pet.fly();
     // }
 }
-havePet(new Bird());
+// havePet(new Bird());
+// const input = document.getElementById("input") //これだと型推論が働いてしまい、input.valueにアクセスできない。型注釈してもダメ(TypescriptでHTMLまでは解析できない)。なので型アサーションをして手動で無理矢理型をつける。
+var input = document.getElementById('input'); //inputであるとアサーションするには＜＞で囲む
+//別解
+// const input = document.getElementById("id") as HTMLInputElement としてもOK
+// もしReact（JSX）で書いてる場合は、タグと混同してしまうのでasで書いた方が無難
+input.value = 'initial input value';
+// 上2行をさらにコンパクトに書くと
+// (document.getElementById("input") as HTMLInputElement).value = "initial input value"

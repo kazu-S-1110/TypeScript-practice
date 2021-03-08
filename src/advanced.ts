@@ -1,4 +1,4 @@
-// タグ付きUnionで型を絞り込む方法(判別共用体(Discriminated Unions)とかとも呼ばれる)
+// 型アサーションを使って、手動で型を上書きする方法（2つある）
 type Engineer = {
   name: string;
   role: string;
@@ -34,7 +34,7 @@ function describeProfile(nomadworker: NomadWorker) {
 }
 
 class Dog {
-  kind: 'dog' = 'dog'; //kindプロパティが判別とかタグとか呼ばれてる
+  kind: 'dog' = 'dog';
   speak() {
     console.log('Bow-wow');
   }
@@ -51,9 +51,7 @@ class Bird {
 type Pet = Dog | Bird;
 function havePet(pet: Pet) {
   pet.speak(); //speakはどちらにもあるのでアクセスが可能
-  switch (
-    pet.kind //タグでswitch文を書くのに向いている
-  ) {
+  switch (pet.kind) {
     case 'bird':
       pet.fly();
   }
@@ -61,5 +59,13 @@ function havePet(pet: Pet) {
   //   pet.fly();
   // }
 }
+// havePet(new Bird());
 
-havePet(new Bird());
+// const input = document.getElementById("input") //これだと型推論が働いてしまい、input.valueにアクセスできない。型注釈してもダメ(TypescriptでHTMLまでは解析できない)。なので型アサーションをして手動で無理矢理型をつける。
+const input = <HTMLInputElement>document.getElementById('input'); //inputであるとアサーションするには＜＞で囲む
+//別解
+// const input = document.getElementById("id") as HTMLInputElement としてもOK
+// もしReact（JSX）で書いてる場合は、タグと混同してしまうのでasで書いた方が無難
+input.value = 'initial input value';
+// 上2行をさらにコンパクトに書くと
+// (document.getElementById("input") as HTMLInputElement).value = "initial input value"
