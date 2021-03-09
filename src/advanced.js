@@ -46,11 +46,12 @@ function havePet(pet) {
         case 'bird':
             pet.fly();
     }
-    // if (pet instanceof Bird) {
-    //   pet.fly();
-    // }
 }
-// havePet(new Bird());
-var input = document.getElementById('input'); //末尾にエクスクラメーションマークを書きNullじゃないことを明示する
-// if文で書くより短くなるが手動で定義することになるので注意が必要
-// input.value = 'initial input value';
+var desiner = {
+    name: "Hora",
+    role: "designer",
+    hoge: "hoge",
+    fuga: "fuga"
+};
+desiner.gaga = "gaga"; //なにもエラーを吐かない
+console.log(desiner.gue); //これもエラーを吐かないので要注意

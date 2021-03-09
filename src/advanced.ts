@@ -1,4 +1,4 @@
-// Non-null assertionの使い方
+// インデックスシグネチャを使用して柔軟なオブジェクトを使用する方法　
 type Engineer = {
   name: string;
   role: string;
@@ -55,12 +55,24 @@ function havePet(pet: Pet) {
     case 'bird':
       pet.fly();
   }
-  // if (pet instanceof Bird) {
-  //   pet.fly();
-  // }
 }
 // havePet(new Bird());
+　
+// (document.getElementById('input') as HTMLInputElement).value = "initial input value"
 
-const input = document.getElementById('input')! //末尾にエクスクラメーションマークを書きNullじゃないことを明示する
-// if文で書くより短くなるが手動で定義することになるので注意が必要
-// input.value = 'initial input value';
+//原則としてオブジェクトにはプロパティを追加することはできない（型安全が働く）
+interface Designer {
+  name: string
+  // 書き方
+  [index: string]: string //インデックスシグネチャがstringなら他プロパティも揃えなければならない
+  // 注意、なんでも追記できてしまうので相当な注意が必要
+}
+const desiner: Designer = {
+  name: "Hora",
+  role: "designer", // インデックスシグネチャを書いてないとエラーを吐いてしまう
+  hoge: "hoge",
+  fuga:"fuga"
+}
+desiner.gaga = "gaga" //なにもエラーを吐かない
+
+console.log(desiner.gue) //これもエラーを吐かないので要注意
