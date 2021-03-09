@@ -1,4 +1,5 @@
 "use strict";
+var _a, _b, _c;
 var jack = {
     name: 'Jack',
     role: 'Back-end',
@@ -10,7 +11,6 @@ function toUpperCase(x) {
     }
     return x;
 }
-var upperHello = toUpperCase("hello"); //この状態ではまだパラメータが文字列か数字が判別できてないため、number型のメソッドが扱えてしまう。
 function describeProfile(nomadworker) {
     console.log(nomadworker.name);
     if ('role' in nomadworker) {
@@ -48,6 +48,15 @@ function havePet(pet) {
             pet.fly();
     }
 }
-var desiner = {
+var designer = {
     name: "Hora",
 };
+var downloadedData = {
+    id: 1
+};
+// downloadedData.userにアクセスしたいとした時の対処法
+// ①if文で返す
+// ②！で宣言する
+// ③optional chainingを使用する（以下が記述）
+console.log((_a = downloadedData.user) === null || _a === void 0 ? void 0 : _a.name); //もし？をつけたところがundefinedかnullの場合はundefinedを返す
+console.log((_c = (_b = downloadedData.user) === null || _b === void 0 ? void 0 : _b.name) === null || _c === void 0 ? void 0 : _c.first); //繋げることも可能

@@ -1,4 +1,4 @@
-// 関数のオーバーロードを使用して、戻り値の型を正しく
+// optional Chaining  
 type Engineer = {
   name: string;
   role: string;
@@ -15,22 +15,12 @@ const jack: EngineerBlogger = {
   follower: 300,
 };
 
-function toUpperCase(x: string): string //解決策２、これを追記した
-function toUpperCase(x: number): number //解決策２、数字のみの場合
 function toUpperCase(x: string | number) {
   if (typeof x === 'string') {
     return x.toUpperCase();
   }
   return x; 
 }
-const upperHello = toUpperCase("hello") //この状態ではまだパラメータが文字列か数字が判別できてないため、number型のメソッドが扱えてしまう。
-// 解決策１　型アサーションを使用する
-// const upperHello = toUpperCase("hello") as string と書いて型を明示的にTypescriptに伝える方法
-// この方法は複数回使う関数に対しては冗長。
-
-// 解決策２　関数のオーバーロードを使用する
-// もう一度　同じ関数を書き、パラメータを限定して書く。
-// 注意として本来の関数で書いたパラメータは無効とされる。つまり、x:string|numberが通用しなくなるので注意
 
 type NomadWorker = Engineer | Blogger;
 function describeProfile(nomadworker: NomadWorker) {
@@ -73,7 +63,28 @@ function havePet(pet: Pet) {
 interface Designer {
   name: string
 }
-const desiner: Designer = {
+const designer: Designer = {
   name: "Hora",
 }
+
+interface DownloadedData {
+  id: number
+  user?: {
+    name?: {
+      first: string
+      last:string
+    }
+  }
+}
+const downloadedData: DownloadedData = {
+  id:1
+}
+// downloadedData.userにアクセスしたいとした時の対処法
+// ①if文で返す
+// ②！で宣言する
+// ③optional chainingを使用する（以下が記述）
+console.log(downloadedData.user?.name) //もし？をつけたところがundefinedかnullの場合はundefinedを返す
+console.log(downloadedData.user?.name?.first) //繋げることも可能
+
+
 
