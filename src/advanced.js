@@ -8,8 +8,9 @@ function toUpperCase(x) {
     if (typeof x === 'string') {
         return x.toUpperCase();
     }
-    return '';
+    return x;
 }
+var upperHello = toUpperCase("hello"); //この状態ではまだパラメータが文字列か数字が判別できてないため、number型のメソッドが扱えてしまう。
 function describeProfile(nomadworker) {
     console.log(nomadworker.name);
     if ('role' in nomadworker) {
@@ -41,7 +42,7 @@ var Bird = /** @class */ (function () {
     return Bird;
 }());
 function havePet(pet) {
-    pet.speak(); //speakはどちらにもあるのでアクセスが可能
+    pet.speak();
     switch (pet.kind) {
         case 'bird':
             pet.fly();
@@ -49,9 +50,4 @@ function havePet(pet) {
 }
 var desiner = {
     name: "Hora",
-    role: "designer",
-    hoge: "hoge",
-    fuga: "fuga"
 };
-desiner.gaga = "gaga"; //なにもエラーを吐かない
-console.log(desiner.gue); //これもエラーを吐かないので要注意
