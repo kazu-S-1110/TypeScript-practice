@@ -1,4 +1,4 @@
-// Nullish Coalescing の書き方　（Coalesce：結合する、合体する）
+// LookUp型を使ってオブジェクトのメンバーの型を取得する
 type Engineer = {
   name: string;
   role: string;
@@ -69,7 +69,7 @@ const designer: Designer = {
 
 interface DownloadedData {
   id: number
-  user?: {
+  user: {
     name?: {
       first: string
       last:string
@@ -77,17 +77,14 @@ interface DownloadedData {
   }
 }
 const downloadedData: DownloadedData = {
-  id:1
+  id: 1,
+  user :{}
 }
-// downloadedData.userにアクセスしたいとした時の対処法
-// ①if文で返す
-// ②！で宣言する
-// ③optional chainingを使用する（以下が記述）
-console.log(downloadedData.user?.name) //もし？をつけたところがundefinedかnullの場合はundefinedを返す
-console.log(downloadedData.user?.name?.first) //繋げることも可能
+console.log(downloadedData.user?.name) 
+console.log(downloadedData.user?.name?.first) 
+const userData = downloadedData.user ?? "no-user" 
 
-const userData = downloadedData.user ?? "no-user" //nullish coalescing、もし代入する値がundefinedかNullの場合のみ、次の値を代入する
-// const userData = downloadedData.user || "no-user"と書いた場合でも似た挙動をする。違いは代入するデータの違い。
-// 0や””（空文字）でもFalseとなりno-userとなってしまうところ
-
-
+// オブジェクトのプロパティの型を取得したいときは[]を使用して取得する
+type id = DownloadedData["id"]
+type user = DownloadedData["user"]["name"]　//階層構造で指定することも可能
+type union = DownloadedData["id" | "user"] //ユニオン型もできるよ
