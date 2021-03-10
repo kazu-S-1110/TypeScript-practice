@@ -1,5 +1,5 @@
 "use strict";
-var _a, _b, _c;
+var _a, _b, _c, _d;
 var jack = {
     name: 'Jack',
     role: 'Back-end',
@@ -60,3 +60,6 @@ var downloadedData = {
 // ③optional chainingを使用する（以下が記述）
 console.log((_a = downloadedData.user) === null || _a === void 0 ? void 0 : _a.name); //もし？をつけたところがundefinedかnullの場合はundefinedを返す
 console.log((_c = (_b = downloadedData.user) === null || _b === void 0 ? void 0 : _b.name) === null || _c === void 0 ? void 0 : _c.first); //繋げることも可能
+var userData = (_d = downloadedData.user) !== null && _d !== void 0 ? _d : "no-user"; //nullish coalescing、もし代入する値がundefinedかNullの場合のみ、次の値を代入する
+// const userData = downloadedData.user || "no-user"と書いた場合でも似た挙動をする。違いは代入するデータの違い。
+// 0や””（空文字）でもFalseとなりno-userとなってしまうところ

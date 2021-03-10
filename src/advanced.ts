@@ -1,4 +1,4 @@
-// optional Chaining  
+// Nullish Coalescing の書き方　（Coalesce：結合する、合体する）
 type Engineer = {
   name: string;
   role: string;
@@ -86,5 +86,8 @@ const downloadedData: DownloadedData = {
 console.log(downloadedData.user?.name) //もし？をつけたところがundefinedかnullの場合はundefinedを返す
 console.log(downloadedData.user?.name?.first) //繋げることも可能
 
+const userData = downloadedData.user ?? "no-user" //nullish coalescing、もし代入する値がundefinedかNullの場合のみ、次の値を代入する
+// const userData = downloadedData.user || "no-user"と書いた場合でも似た挙動をする。違いは代入するデータの違い。
+// 0や””（空文字）でもFalseとなりno-userとなってしまうところ
 
 
