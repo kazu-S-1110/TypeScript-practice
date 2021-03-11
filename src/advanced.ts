@@ -1,4 +1,4 @@
-// 型の互換性を確認しよう
+// オーバーロードの応用（関数型のオーバーロードはInterfaceで定義する）
 type Engineer = {
   name: string;
   role: string;
@@ -15,12 +15,6 @@ const jack: EngineerBlogger = {
   follower: 300,
 };
 
-function toUpperCase(x: string | number) {
-  if (typeof x === 'string') {
-    return x.toUpperCase();
-  }
-  return x; 
-}
 
 type NomadWorker = Engineer | Blogger;
 function describeProfile(nomadworker: NomadWorker) {
@@ -88,34 +82,24 @@ type id = DownloadedData["id"]
 type user = DownloadedData["user"]["name"]
 type union = DownloadedData["id" | "user"] 
 
-//構造的部分型の応用
-let target :"hello" = "hello"
-let source: string = "hello"
-source = target //可能
-// target = source //不可能,targetの方が厳しい型だから
-enum Color  {
-  RED,
-  BLUE
+//関数のオーバーロードの優先順位は上から
+function toUpperCase(x: string): string;
+function toUpperCase(x: number): number;
+function toUpperCase(x: string | number): string | number {
+  if (typeof x === "string") {
+    return x.toUpperCase()
+  }
+  return x
 }
-let target2 = Color.RED
-let source2 = 0
-target2 = source2 //逆も可能、enum型とnumber型は互換性がある
 
-// 関数の代入はややこしいのでドキュメントを読むこと！
-let target3 = function (a: string,b:string) { }
-let source3 = function (a: string) { }
-target3 = source3 //可能、引数が多いとJavaScriptでは無視されるため問題はない
-// source3 = target3 //不可能、解決策としてオプショナルパラメータ（b?と書く）を使用することで回避が可能
+//オーバーロードした関数を代入したものの型はどうなるか。
+const upperHello = toUpperCase
+//明示的に型を書いて定義する
+interface TmpFunc {
+  (x: string): string
+  (x:number):number
+}
+// もしオーバーロードした関数に型注釈する際は型に沿った関数を書かないとダメ。
+// const upperHello: TmpFunc = function (x: string | number) { return x}
 
-// クラスの代入
-class AdvancedPerson  {
-  name = "Peter"
-}
-class AdvancedCar {
-  name = "aqua"
-  age=29
-}
-let target4 = new AdvancedPerson()
-let source4 = new AdvancedCar()
-target4 = source4　//可能、左（代入先）が多いとダメ、右（代入する値）が多い分には可能
-// 更にはクラスのプロパティにprivate,protectedがあるとダメ。そのクラスから作られたインスタンス同士でないと代入は不可。
+
