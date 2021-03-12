@@ -1,4 +1,4 @@
-// オーバーロードの応用（関数型のインターセクションはオーバーロードになる）
+// オーバーロードの応用（関数の型のユニオン）
 type Engineer = {
   name: string;
   role: string;
@@ -99,16 +99,23 @@ interface TmpFunc {
 }
 // const upperHello: TmpFunc = function (x: string | number) { return x}
 
+// interface FuncA {
+//   (a: string, b: number): number
+//   (a: number, b: string): number
+// }
+// interface FuncB {
+//   (a:string):number
+// }
+// let intersecFunc: FuncA & FuncB 
+// intersecFunc = function (a: number | string, b?: number | string) { return 0 }
 interface FuncA {
-  (a: string, b: number): number
-  (a: number, b: string): number
+  (a:number): number
 }
 interface FuncB {
-  (a:string):number
+  (a:string):string
 }
-let intersecFunc: FuncA & FuncB //interfaceのインターセクション型、左から書いたinterfaceが優先される。
-// これも全ての型に合わせた引数、パターンを考慮して関数を書く必要がある。
-intersecFunc = function (a: number | string, b?: number | string) { return 0 }
+let unionFunc: FuncA | FuncB //関数の型をユニオンで繋げたら、パラメータはインターセクション型になり、戻り値はユニオン型になる
+//今回の場合、stringとnumberのインターセクション型となりneverとなる,どっちも受け付けるのでややこしい
 
 
 
