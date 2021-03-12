@@ -58,7 +58,7 @@ function toUpperCase(x) {
     }
     return x;
 }
-//オーバーロードした関数を代入したものの型はどうなるか。
 var upperHello = toUpperCase;
-// もしオーバーロードした関数に型注釈する際は型に沿った関数を書かないとダメ。
-// const upperHello: TmpFunc = function (x: string | number) { return x}
+var intersecFunc; //interfaceのインターセクション型、左から書いたinterfaceが優先される。
+// これも全ての型に合わせた引数、パターンを考慮して関数を書く必要がある。
+intersecFunc = function (a, b) { return 0; };

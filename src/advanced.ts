@@ -1,4 +1,4 @@
-// オーバーロードの応用（関数型のオーバーロードはInterfaceで定義する）
+// オーバーロードの応用（関数型のインターセクションはオーバーロードになる）
 type Engineer = {
   name: string;
   role: string;
@@ -92,14 +92,27 @@ function toUpperCase(x: string | number): string | number {
   return x
 }
 
-//オーバーロードした関数を代入したものの型はどうなるか。
 const upperHello = toUpperCase
-//明示的に型を書いて定義する
 interface TmpFunc {
   (x: string): string
   (x:number):number
 }
-// もしオーバーロードした関数に型注釈する際は型に沿った関数を書かないとダメ。
 // const upperHello: TmpFunc = function (x: string | number) { return x}
+
+interface FuncA {
+  (a: string, b: number): number
+  (a: number, b: string): number
+}
+interface FuncB {
+  (a:string):number
+}
+let intersecFunc: FuncA & FuncB //interfaceのインターセクション型、左から書いたinterfaceが優先される。
+// これも全ての型に合わせた引数、パターンを考慮して関数を書く必要がある。
+intersecFunc = function (a: number | string, b?: number | string) { return 0 }
+
+
+
+
+
 
 
