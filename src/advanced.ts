@@ -1,4 +1,4 @@
-// オーバーロードの応用（関数の型のユニオン）
+// レストパラメータに配列やタプルを指定する
 type Engineer = {
   name: string;
   role: string;
@@ -82,7 +82,6 @@ type id = DownloadedData["id"]
 type user = DownloadedData["user"]["name"]
 type union = DownloadedData["id" | "user"] 
 
-//関数のオーバーロードの優先順位は上から
 function toUpperCase(x: string): string;
 function toUpperCase(x: number): number;
 function toUpperCase(x: string | number): string | number {
@@ -97,29 +96,14 @@ interface TmpFunc {
   (x: string): string
   (x:number):number
 }
-// const upperHello: TmpFunc = function (x: string | number) { return x}
-
-// interface FuncA {
-//   (a: string, b: number): number
-//   (a: number, b: string): number
+//パラメータに配列を指定（下は数値を指定）
+// function advancedFunc(...args:number[]) {
+  
 // }
-// interface FuncB {
-//   (a:string):number
-// }
-// let intersecFunc: FuncA & FuncB 
-// intersecFunc = function (a: number | string, b?: number | string) { return 0 }
-interface FuncA {
-  (a:number): number
-}
-interface FuncB {
-  (a:string):string
-}
-let unionFunc: FuncA | FuncB //関数の型をユニオンで繋げたら、パラメータはインターセクション型になり、戻り値はユニオン型になる
-//今回の場合、stringとnumberのインターセクション型となりneverとなる,どっちも受け付けるのでややこしい
+// advancedFunc(3, 2, 4, 1)
+// タプルを指定する,またタプルにオプショナルパラメータを付与させることも可能,更にレストパラメータを指定することも可能（タプルだけできる）
+function advancedFunc(...args: [number, string, boolean?, ...number[]]) { }
 
-
-
-
-
+advancedFunc(3,"hi",true,4,4,2,)
 
 

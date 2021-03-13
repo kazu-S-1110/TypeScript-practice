@@ -59,6 +59,15 @@ function toUpperCase(x) {
     return x;
 }
 var upperHello = toUpperCase;
-var intersecFunc; //interfaceのインターセクション型、左から書いたinterfaceが優先される。
-// これも全ての型に合わせた引数、パターンを考慮して関数を書く必要がある。
-intersecFunc = function (a, b) { return 0; };
+//パラメータに配列を指定（下は数値を指定）
+// function advancedFunc(...args:number[]) {
+// }
+// advancedFunc(3, 2, 4, 1)
+// タプルを指定する,またタプルにオプショナルパラメータを付与させることも可能,更にレストパラメータを指定することも可能（タプルだけできる）
+function advancedFunc() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+}
+advancedFunc(3, "hi", true, 4, 4, 2);
