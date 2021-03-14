@@ -1,4 +1,4 @@
-// レストパラメータに配列やタプルを指定する
+// readonlyを配列やタプルに付与する
 type Engineer = {
   name: string;
   role: string;
@@ -96,14 +96,11 @@ interface TmpFunc {
   (x: string): string
   (x:number):number
 }
-//パラメータに配列を指定（下は数値を指定）
 // function advancedFunc(...args:number[]) {
   
-// }
 // advancedFunc(3, 2, 4, 1)
-// タプルを指定する,またタプルにオプショナルパラメータを付与させることも可能,更にレストパラメータを指定することも可能（タプルだけできる）
-function advancedFunc(...args: [number, string, boolean?, ...number[]]) { }
+// function advancedFunc(...args: readonly[number, string, boolean?, ...number[]]) { }  //タブルのreadonly
+function advancedFunc(...args: readonly number[]) { } //配列のreadonly
 
-advancedFunc(3,"hi",true,4,4,2,)
 
 

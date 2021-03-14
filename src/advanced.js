@@ -59,15 +59,12 @@ function toUpperCase(x) {
     return x;
 }
 var upperHello = toUpperCase;
-//パラメータに配列を指定（下は数値を指定）
 // function advancedFunc(...args:number[]) {
-// }
 // advancedFunc(3, 2, 4, 1)
-// タプルを指定する,またタプルにオプショナルパラメータを付与させることも可能,更にレストパラメータを指定することも可能（タプルだけできる）
+// function advancedFunc(...args: readonly[number, string, boolean?, ...number[]]) { }  //タブルのreadonly
 function advancedFunc() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
-}
-advancedFunc(3, "hi", true, 4, 4, 2);
+} //配列のreadonly
