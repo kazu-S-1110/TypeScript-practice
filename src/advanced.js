@@ -69,12 +69,12 @@ function advancedFunc() {
     }
 }
 var milk = 'milk';
-var drink = milk; //この場合、Drinkは”milk”というリテラル型
+var drink = milk;
 var milk2 = 'milk';
-var drink2 = milk2; //この場合、drink2はstring型、constでいい感じがするけど配列やタプルでconstアサーションは役立つ
-var array = [10, 20]; //この場合arrayはnumberの配列型
-var array2 = [10, 20, 30]; //この場合、array2は[10,20,30]しかない配列、つまりタプル型になってしまう。（readonlyになる）-> タプル型を書くときはこう書くと便利かも
+var drink2 = milk2;
+var array = [10, 20];
+var array2 = [10, 20, 30];
 var peter = {
     name: 'peter',
     age: 35,
-}; //こう書くとpeterというオブジェクトはリテラル型の読み取り専用になる。意外と便利なので覚えたい
+};

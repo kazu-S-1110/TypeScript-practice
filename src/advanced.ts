@@ -1,4 +1,4 @@
-// constアサーション
+// typeofの使い方（Typescriptの中での）
 type Engineer = {
   name: string;
   role: string;
@@ -101,13 +101,16 @@ interface TmpFunc {
 function advancedFunc(...args: readonly number[]) {}
 
 let milk = 'milk' as const;
-let drink = milk; //この場合、Drinkは”milk”というリテラル型
+let drink = milk;
 let milk2 = 'milk';
-let drink2 = milk2; //この場合、drink2はstring型、constでいい感じがするけど配列やタプルでconstアサーションは役立つ
+let drink2 = milk2;
 
-const array = [10, 20]; //この場合arrayはnumberの配列型
-const array2 = [10, 20, 30] as const; //この場合、array2は[10,20,30]しかない配列、つまりタプル型になってしまう。（readonlyになる）-> タプル型を書くときはこう書くと便利かも
+const array = [10, 20];
+const array2 = [10, 20, 30] as const;
 const peter = {
   name: 'peter',
   age: 35,
-} as const; //こう書くとpeterというオブジェクトはリテラル型の読み取り専用になる。意外と便利なので覚えたい
+} as const;
+
+// すでにあるオブジェクトの型を定数に代入したいときはtypeofを使うと便利
+type Petertype = typeof peter;
