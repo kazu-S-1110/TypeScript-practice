@@ -1,4 +1,4 @@
-// readonlyを配列やタプルに付与する
+// constアサーション
 type Engineer = {
   name: string;
   role: string;
@@ -14,7 +14,6 @@ const jack: EngineerBlogger = {
   role: 'Back-end',
   follower: 300,
 };
-
 
 type NomadWorker = Engineer | Blogger;
 function describeProfile(nomadworker: NomadWorker) {
@@ -44,63 +43,71 @@ class Bird {
 }
 type Pet = Dog | Bird;
 function havePet(pet: Pet) {
-  pet.speak(); 
+  pet.speak();
   switch (pet.kind) {
     case 'bird':
       pet.fly();
   }
 }
 // havePet(new Bird());
-　
 // (document.getElementById('input') as HTMLInputElement).value = "initial input value"
 
 interface Designer {
-  name: string
+  name: string;
 }
 const designer: Designer = {
-  name: "Hora",
-}
+  name: 'Hora',
+};
 
 interface DownloadedData {
-  id: number
+  id: number;
   user: {
     name?: {
-      first: string
-      last:string
-    }
-  }
+      first: string;
+      last: string;
+    };
+  };
 }
 const downloadedData: DownloadedData = {
   id: 1,
-  user :{}
-}
-console.log(downloadedData.user?.name) 
-console.log(downloadedData.user?.name?.first) 
-const userData = downloadedData.user ?? "no-user" 
+  user: {},
+};
+console.log(downloadedData.user?.name);
+console.log(downloadedData.user?.name?.first);
+const userData = downloadedData.user ?? 'no-user';
 
-type id = DownloadedData["id"]
-type user = DownloadedData["user"]["name"]
-type union = DownloadedData["id" | "user"] 
+type id = DownloadedData['id'];
+type user = DownloadedData['user']['name'];
+type union = DownloadedData['id' | 'user'];
 
 function toUpperCase(x: string): string;
 function toUpperCase(x: number): number;
 function toUpperCase(x: string | number): string | number {
-  if (typeof x === "string") {
-    return x.toUpperCase()
+  if (typeof x === 'string') {
+    return x.toUpperCase();
   }
-  return x
+  return x;
 }
 
-const upperHello = toUpperCase
+const upperHello = toUpperCase;
 interface TmpFunc {
-  (x: string): string
-  (x:number):number
+  (x: string): string;
+  (x: number): number;
 }
 // function advancedFunc(...args:number[]) {
-  
+
 // advancedFunc(3, 2, 4, 1)
-// function advancedFunc(...args: readonly[number, string, boolean?, ...number[]]) { }  //タブルのreadonly
-function advancedFunc(...args: readonly number[]) { } //配列のreadonly
+// function advancedFunc(...args: readonly[number, string, boolean?, ...number[]]) { }
+function advancedFunc(...args: readonly number[]) {}
 
+let milk = 'milk' as const;
+let drink = milk; //この場合、Drinkは”milk”というリテラル型
+let milk2 = 'milk';
+let drink2 = milk2; //この場合、drink2はstring型、constでいい感じがするけど配列やタプルでconstアサーションは役立つ
 
-
+const array = [10, 20]; //この場合arrayはnumberの配列型
+const array2 = [10, 20, 30] as const; //この場合、array2は[10,20,30]しかない配列、つまりタプル型になってしまう。（readonlyになる）-> タプル型を書くときはこう書くと便利かも
+const peter = {
+  name: 'peter',
+  age: 35,
+} as const; //こう書くとpeterというオブジェクトはリテラル型の読み取り専用になる。意外と便利なので覚えたい
