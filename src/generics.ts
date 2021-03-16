@@ -1,29 +1,22 @@
-// インターフェイスに対してジェネリクスを使用する方法
+// ジェネリック型のUtility型の学習（型のライブラリ）
 
-class LightDataBase<T extends string | number | boolean>{ 
-  private data: T[] = [] 
-  add(item: T) {  
-    this.data.push(item)
-  }
-  remove(item: T) {
-    this.data.splice(this.data.indexOf(item),1)
-  }
-  get() {
-    return this.data
-  }
+interface Todo {
+  title: string
+  text:string
 }
-const stringLightDataBase = new LightDataBase<string>()
-stringLightDataBase.add("apple")
-stringLightDataBase.add("banana")
-stringLightDataBase.add("orange")
-stringLightDataBase.remove("apple")
-console.log(stringLightDataBase.get())
+//型のライブラリの紹介（Typescriptが内臓している）
+type Todoable = Partial<Todo> //全てオプショナルにする
+type ReadTodo = Readonly<Todo>　//全てReadOnlyにする
 
-interface TmpDataBase<T>{ //タイプエイリアスでも同様
-  id: number,
-  data:T[]
-}
-const tmpDataBase: TmpDataBase<number> ={
-  id: 2,
-  data:[34,43,53]
-}
+//またPromise でもジェネリック型が使える場面がある。
+const fetchData :Promise<string>= new Promise(resolve => {
+  setTimeout(() => {
+    resolve("hello")
+  }, 3000);
+})
+
+fetchData.then(data => {
+  data.toUpperCase()
+})
+// 配列もジェネリック型が使える
+const vegetables:Array<string> = ["tomato","brocoli","asparagus"]
