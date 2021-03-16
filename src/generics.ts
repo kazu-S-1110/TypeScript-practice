@@ -1,15 +1,20 @@
-//keyofを使用してオブジェクトキーのユニオン型を作る方法
+// クラスに対してジェネリクスを使用する方法
 
-type K = keyof { //keyofを使用することでキーのみを取得する、複数取得するとユニオン型となる。
-  name: string
-  age:number
-}// ジェネリクスと組み合わせることが多い
-
-//動的に対応できるため、以下の書き方に慣れると良い。
-function copy<T extends { name: string }, U extends keyof T>(value: T, key: U): T { 
-  console.log(value[key]) 
-  return value;
+class LightDataBase<T extends string | number | boolean>{ //ジェネリクスの書き方はこんな感じ
+  private data: T[] = [] 
+  add(item: T) {  //ユニオン型と似てるが安全性が高い。もしユニオン型だけで指定するとaddのパラメーターもユニオンになってしまう。ジェネリクスを使用することで初めに決めて型のみで運用するため安全となる。
+    this.data.push(item)
+  }
+  remove(item: T) {
+    this.data.splice(this.data.indexOf(item),1)
+  }
+  get() {
+    return this.data
+  }
 }
-console.log(copy({ name: 'Jack', age: 28, height: 170 }, "height"));//オブジェクトキーが複数でも対応ができる
-
-
+const stringLightDataBase = new LightDataBase<string>()
+stringLightDataBase.add("apple")
+stringLightDataBase.add("banana")
+stringLightDataBase.add("orange")
+stringLightDataBase.remove("apple")
+console.log(stringLightDataBase.get( ))
