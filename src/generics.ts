@@ -1,8 +1,8 @@
-// クラスに対してジェネリクスを使用する方法
+// インターフェイスに対してジェネリクスを使用する方法
 
-class LightDataBase<T extends string | number | boolean>{ //ジェネリクスの書き方はこんな感じ
+class LightDataBase<T extends string | number | boolean>{ 
   private data: T[] = [] 
-  add(item: T) {  //ユニオン型と似てるが安全性が高い。もしユニオン型だけで指定するとaddのパラメーターもユニオンになってしまう。ジェネリクスを使用することで初めに決めて型のみで運用するため安全となる。
+  add(item: T) {  
     this.data.push(item)
   }
   remove(item: T) {
@@ -17,4 +17,13 @@ stringLightDataBase.add("apple")
 stringLightDataBase.add("banana")
 stringLightDataBase.add("orange")
 stringLightDataBase.remove("apple")
-console.log(stringLightDataBase.get( ))
+console.log(stringLightDataBase.get())
+
+interface TmpDataBase<T>{ //タイプエイリアスでも同様
+  id: number,
+  data:T[]
+}
+const tmpDataBase: TmpDataBase<number> ={
+  id: 2,
+  data:[34,43,53]
+}

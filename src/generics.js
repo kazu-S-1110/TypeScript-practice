@@ -1,5 +1,5 @@
 "use strict";
-// クラスに対してジェネリクスを使用する方法
+// インターフェイスに対してジェネリクスを使用する方法
 var LightDataBase = /** @class */ (function () {
     function LightDataBase() {
         this.data = [];
@@ -21,3 +21,7 @@ stringLightDataBase.add("banana");
 stringLightDataBase.add("orange");
 stringLightDataBase.remove("apple");
 console.log(stringLightDataBase.get());
+var tmpDataBase = {
+    id: 2,
+    data: [34, 43, 53]
+};
