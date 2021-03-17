@@ -1,14 +1,12 @@
-// ジェネリック型のUtility型の学習（型のライブラリ）
+// デフォルトの型パラメータの書き方
 
 interface Todo {
   title: string
   text:string
 }
-//型のライブラリの紹介（Typescriptが内臓している）
 type Todoable = Partial<Todo> //全てオプショナルにする
 type ReadTodo = Readonly<Todo>　//全てReadOnlyにする
 
-//またPromise でもジェネリック型が使える場面がある。
 const fetchData :Promise<string>= new Promise(resolve => {
   setTimeout(() => {
     resolve("hello")
@@ -18,5 +16,9 @@ const fetchData :Promise<string>= new Promise(resolve => {
 fetchData.then(data => {
   data.toUpperCase()
 })
-// 配列もジェネリック型が使える
-const vegetables:Array<string> = ["tomato","brocoli","asparagus"]
+
+interface ResponseData<T = string> { //イコールで繋げると初期値が設定できる。もし書いてないと設定する際に引数が必要になる。
+  data: T
+  status: number
+}
+let tmp: ResponseData
