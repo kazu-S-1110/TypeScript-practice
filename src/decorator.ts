@@ -1,11 +1,23 @@
-//デコレーターとはクラスに対して装飾をする関数
+//デコレーターファクタリーについて
+//デコレーターはパラメータに１つのみしか設定できない。
+// そこで２つ以上受け取るためにデコレーターを返すデコレーターファクタリーを使用する。
+// デコレーターファクタリーの中にデコレーターを内蔵するだけで良い
 
-function Logging(constructor: Function) { //デコレーターはクラスを受けてる。クラスは実質コンストラクター関数であり、関数型のfunctionを受け取るように記述する
-  console.log("Logging...")
-  console.log(constructor )
+// function Logging(constructor: Function) {  //デコレーター
+//   console.log("Logging...")
+//   console.log(constructor )
+// }
+
+function Logging(message:string) {　//デコレーターファクタリー、これでパラメータを受け取ることが可能
+  return function Logging(constructor: Function) { 
+    console.log("Logging...")
+    console.log(message)
+    console.log(constructor)
+  }
+  
 }
 
-@Logging //まだインスタンスを生成してないのにデコレーターは走る。デコレーターはインスタンス生成時ではなく、クラスの宣言時に処理が走る
+@Logging("明日の天気はなんだろうね")
 class User {
   name = "Jack"
   constructor() {
