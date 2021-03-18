@@ -2,5 +2,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.ignoreWords": [
     "nomadworker"
-  ]
+  ],
+  "compile-hero.disable-compile-files-on-did-save-code": false
 }
