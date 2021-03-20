@@ -35,6 +35,6 @@ class Developer implements Human, Namable {
   }  
 }
 const user = new Developer(20, 3)
-const user2 = new Developer(23, 1, "hoge")
+
 
 
