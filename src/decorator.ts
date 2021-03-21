@@ -1,4 +1,4 @@
-//戻り値にクラスを指定して新しいクラスを作成する方法
+//プロパティデコレーターの使い方
 
 function Logging() {　
   console.log("１、Logging Factory")
@@ -9,8 +9,8 @@ function Logging() {　
 
 function Component(template: string, selector: string) {
   console.log("Component Factory")
-  return function <T extends {new(...args:any[]):{name:string}}>(constructor: T) { //最低限継承するものにextendsで指定する
-    return class extends constructor { //受け取るコンストラクターを指定するがパラメータが限られてしまうため、ジェネリクスを使用する
+  return function <T extends {new(...args:any[]):{name:string}}>(constructor: T) { 
+    return class extends constructor { 
       constructor(...args:any[]) {
         super(...args)
         console.log("Component")
@@ -25,9 +25,17 @@ function Component(template: string, selector: string) {
   }
 }
 
+function PropertyLogging(target:any, propertyKey:string) { //プロパティデコレーターは２つの引数を取る
+  console.log("propertyLogging")
+  console.log(target) 
+  console.log(propertyKey)//デコレートするキーがstaticならtargetは単純なクラスとなるが、staticでない場合、targetはクラスのprototypeを取得する。
+}
+
+
 // @Logging()
 @Component("<h1>{{name}}</h1>","#app")//index.htmlにある#appにh1タグを埋め込むよう作成してみる
 class User {
+  @PropertyLogging
   name = "yaoooooo"
   constructor(public age:number) {
     console.log("User was created!")
