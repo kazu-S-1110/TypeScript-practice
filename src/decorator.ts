@@ -1,4 +1,4 @@
-//メソッドデコレータの使い方
+//アクセサーデコレータの使い方
 
 function Logging() {
   console.log('１、Logging Factory');
@@ -37,11 +37,22 @@ function MethodLogging(
   propertyKey: string,
   descriptor: PropertyDescriptor
 ) {
-  //メソッドデコレーターの記述、引数は3つとる
   console.log('MethodLogging');
   console.log(target);
   console.log(propertyKey);
-  console.log(descriptor); //propertyDescriptorはプロパティの持つメタ情報的なやつ。writableやenumerable,configurableなどがある。
+  console.log(descriptor);
+}
+function AccessorLogging(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  //引数は3つ
+
+  console.log('AccessorLogging');
+  console.log(target);
+  console.log(propertyKey);
+  console.log(descriptor); //メソッドデコレーターと少し似ている。get()とset()が定義されている。
 }
 
 // @Logging()
@@ -49,9 +60,17 @@ function MethodLogging(
 class User {
   @PropertyLogging
   name = 'yaoooooo';
-  constructor(public age: number) {
+  constructor(private _age: number) {
     console.log('User was created!');
   }
+  @AccessorLogging
+  get age() {
+    return this._age;
+  }
+  set age(value) {
+    this._age = value;
+  }
+
   @MethodLogging //適用方法
   greeting() {
     console.log('hello!');
