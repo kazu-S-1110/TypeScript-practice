@@ -1,3 +1,18 @@
+interface Scoreable {
+  readonly totalScore: number
+  render():void
+}
+
+interface Foodable {
+  element: HTMLDivElement
+  clickEventHandler():void
+}
+interface Foodsable {
+  elements: NodeListOf<HTMLDivElement>
+  readonly activeElements: HTMLDivElement[]
+  readonly activeElementsScore:number[]
+}
+
 class Score {
   private static instance: Score;
   get totalScore() {
@@ -17,7 +32,9 @@ class Score {
     return Score.instance;
   }
 }
-class Food {
+
+
+class Food implements Foodable {
   constructor(public element: HTMLDivElement) {
     element.addEventListener('click', this.clickEventHandler.bind(this));
   }
@@ -27,7 +44,7 @@ class Food {
     score.render();
   }
 }
-class Foods {
+class Foods implements Foodsable {
   private static instance: Foods;
   elements = document.querySelectorAll<HTMLDivElement>('.food');
   private _activeElements: HTMLDivElement[] = []; //food--activeのものを入れる配列を用意
