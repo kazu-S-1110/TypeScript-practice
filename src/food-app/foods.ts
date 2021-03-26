@@ -1,4 +1,8 @@
-class Foods implements Foodsable {
+import { Foodsable } from "./interfaces.js"
+import { Food } from "./food.js"
+
+
+export class Foods implements Foodsable {
   private static instance: Foods;
   elements = document.querySelectorAll<HTMLDivElement>('.food');
   private _activeElements: HTMLDivElement[] = []; //food--activeのものを入れる配列を用意
