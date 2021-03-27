@@ -1,8 +1,9 @@
-import { Foodsable } from "./interfaces.js"
+import { Foodsable as Foodlistable } from "./interfaces.js"
+// import * as interfaces from "./interfaces.js"　と書いて使うところでinterfaces.Foodsableと書く
 import { Food } from "./food.js"
 
 
-export class Foods implements Foodsable {
+export class Foods implements Foodlistable {
   private static instance: Foods;
   elements = document.querySelectorAll<HTMLDivElement>('.food');
   private _activeElements: HTMLDivElement[] = []; //food--activeのものを入れる配列を用意
