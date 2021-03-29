@@ -1,6 +1,6 @@
-import { Foodsable as Foodlistable } from "./interfaces.js"
+import { Foodsable as Foodlistable } from "./interfaces"
 // import * as interfaces from "./interfaces.js"　と書いて使うところでinterfaces.Foodsableと書く
-import { Food } from "./food.js" //import文の実行されるタイミング、回数は初回だけ。
+import { Food } from "./food" //import文の実行されるタイミング、回数は初回だけ。
 
 
 export class Foods implements Foodlistable {
