@@ -1,6 +1,9 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development', //バンドルファイルの形式を選択可能、デフォは"production"
+  //使い分けることが一般的なのでdev-serverのときはdev、buildしたい時はproductionとする。
+  // webpackのconfigファイルを２つに分ければ解決。package.jsonに追記する。
   entry: './src/food-app/main.ts', //webpackがビルドする際に開始点となるファイルを設定
   output: {
     filename: 'bundle.js', //[contenthash]と先頭に書くことで中身をハッシュ化した値を付与できる。キャッシュによる齟齬の対策に有効。
