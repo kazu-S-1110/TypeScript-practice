@@ -5,3 +5,9 @@
 //解決策、誰かがd.tsファイルを書いてないか検索する(例　types lodash) 型定義としてtypesフォルダに入るため
 //definitelyTypedリポジトリにほとんどある。Typescriptとリポジトリメンバーが管理していて信頼は厚い。
 console.log(_.shuffle([1, 2, 3, 4]))
+
+namespace myApp { //スコープを限定して使える、使いたいものがあればexportする。最近はあまり使われなくなってきた。
+  const hello = "hello in namespace"
+  export const name = "Jack"
+}
+const hello = "yeah!"
