@@ -1,13 +1,16 @@
-// declare module "lodash" { //手動で型定義ファイルを記述する方法
-//   export function shuffle<T>(arr:T[]):T[]
-// }
-// interface Lodash {
-//   shuffle<T>(arr:T[]):T[]
-// }
-// const _ :Lodash
-// declare namespace _ {
-//   function shuffle<T>(arr:T[]):T[]
-// }
+// 型定義ファイルの拡張方法,使う際は名前付きエクスポートで使う（例：import {shuffle} from "axios"
+import axios from "axios"
+declare module axios {　
+  export function shuffle<T>(arr:T[]):T[] 　//新たに関数を追加する方法
+}
+
+import _ from "lodash"
+declare module "lodash" { 
+  interface LoDashStatic { //既存のinterfaceを拡張する方法　
+    hello :string
+  }
+}
+
 
 // declare global {
 // const hello;string
