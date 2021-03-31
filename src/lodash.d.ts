@@ -11,6 +11,9 @@ declare module "lodash" {
   }
 }
 
+//既存のinterfaceを継承して拡張する方法
+interface foo extends _.LoDashExplicitWrapper {}
+
 
 // declare global {
 // const hello;string
