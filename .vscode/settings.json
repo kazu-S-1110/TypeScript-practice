@@ -1,7 +1,8 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.ignoreWords": [
-    "nomadworker"
+    "nomadworker",
+    "yahoooooo"
   ],
   "compile-hero.disable-compile-files-on-did-save-code": true,
   "liveServer.settings.port": 5501,
